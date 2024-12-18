@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EWTN Radio Católica Mundial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+<body style="text-align: center; font-family: Arial, sans-serif; margin-top: 50px;">
+
+    <h1><n>EWTN Radio Católica Mundial</n></h1>
+    <p>Escucha la transmisión en vivo</p>
+
+    <!-- Reproductor de audio -->
+    <video id="audioPlayer" controls autoplay style="width: 80%; max-width: 500px; height: 50px; background-color: #f5f5f5;">
+        Tu navegador no soporta la reproducción de audio.
+    </video>
+
+    <script>
+        // Verifica si HLS.js es compatible
+        if (Hls.isSupported()) {
+            const video = document.getElementById('audioPlayer');
+            const hls = new Hls();
+            // Enlace del stream
+            hls.loadSource('https://ewtn-sgrewind.streamguys1.com/sgrewind/spanish/playlist.m3u8');
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        }
+        // Para navegadores con soporte nativo HLS (Safari, iOS)
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'https://ewtn-sgrewind.streamguys1.com/sgrewind/spanish/playlist.m3u8';
+            video.addEventListener('canplay', function () {
+                video.play();
+            });
+        }
+    </script>
+<br><br><br>
+<h6>
+  <!--home page = página de inicio-->
+  <a href="https://VDLPYL.github.io/VDLPYL">VDLPYL</a>
+</h6>
+</body>
+</html>
